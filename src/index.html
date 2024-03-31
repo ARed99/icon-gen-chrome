@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Icon GMan</title>
 </head>
+
 <body>
     <h1>Icon GMan</h1>
     <div class="input-image-box">
-        <input id="image-url" type="url" placeholder="paste image url here">
+        <input id="image-url" type="file" accept="image/*">
+        <canvas id="outputCanvas" style="display: none;"></canvas>
     </div>
     <div class="btn-box">
         <button id="btn-create">
@@ -17,8 +20,10 @@
         </button>
     </div>
     <div class="result">
+        <img id="outputImage" src="" alt="Resized Image">
 
     </div>
     <script src="app.js"></script>
 </body>
+
 </html>
