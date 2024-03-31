@@ -20,8 +20,20 @@ body
     border-color: rgb(18, 88, 168);
     margin: 5px;
 }
+.input-image-box input 
+{
+    width: 360px;
+    padding: 5px;
+    font-size: large;
+    font-family: cursive;
+    background-color: rgb(3, 0, 79);
+    border: none;
+    height: 100%;
+    color: antiquewhite;
+    word-break: keep-all;
+}
 .btn-box
 {
-    
+
 }
 .result{}
