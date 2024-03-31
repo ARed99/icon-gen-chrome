@@ -10,4 +10,18 @@ body
     height: 600px;
     background-color: rgb(10, 10, 63);
     color: antiquewhite;
+   
 }
+.input-image-box
+{
+    border-style: dotted;
+    width: 380px;
+    height: 200px;
+    border-color: rgb(18, 88, 168);
+    margin: 5px;
+}
+.btn-box
+{
+    
+}
+.result{}
