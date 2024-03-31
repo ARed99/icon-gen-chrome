@@ -3,9 +3,6 @@
     "name": "Icon GMan",
     "version": "1.0",
     "description": "A browser extension that genarate Icons for devlopment.",
-    "permissions": [
-      "activeTab"
-    ],
     "action": {
         "default_popup": "./src/index.html",
         "default_icon": {
@@ -14,6 +11,6 @@
             "32": "icons/32x32.png"
         }
     },
-    
+    "permissions": ["storage", "scripting"]
   }
   
