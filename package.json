@@ -13,5 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "snowpack": "^3.8.8"
+  },
+  "dependencies": {
+    "sharp": "^0.33.3"
   }
 }
