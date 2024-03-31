@@ -9,8 +9,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "pica": "^9.0.1"
-  }
+  "license": "ISC"
 }
