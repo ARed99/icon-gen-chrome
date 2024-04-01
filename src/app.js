@@ -1,5 +1,4 @@
-const sharp = require('sharp');
-const imageUrl = document.getElementById("image-url").value;
+
 const create_btn = document.getElementById('btn-create');
 const IMAGE_ASPECT_RATIOS = {
     "16x16": 16,
@@ -22,22 +21,82 @@ const IMAGE_ASPECT_RATIOS = {
 };
 
 
-function reizeImage(aspect_ratio) {
-    sharp(imageUrl)
-        .resize(aspect_ratio)
-        .toBuffer()
-        .then((data) => {
-            console.log(`${aspect_ratio} : ${data}`)
-        })
-}
+// Function to resize an image
+function resizeImage(file, maxWidth, maxHeight) {
+    return new Promise((resolve, reject) => {
+      // Create an image element
+      const img = new Image();
+      img.onload = function() {
+        // Calculate new dimensions while preserving aspect ratio
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth || height > maxHeight) {
+          const ratio = Math.min(maxWidth / width, maxHeight / height);
+          width *= ratio;
+          height *= ratio;
+        }
+  
+        // Create a canvas element
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Draw image on canvas
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        // Convert canvas to data URL
+        const dataURL = canvas.toDataURL('image/jpeg'); // Change format if needed
+  
+        resolve(dataURL);
+      };
+      img.onerror = reject;
+  
+      // Load image from file
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  
+
+
+
+
+
+
 
 function start() {
-    if (imageUrl === "") return;
-    for (const image_ratio in IMAGE_ASPECT_RATIOS) {
-        const aspect_ratio = IMAGE_ASPECT_RATIOS[image_ratio]
+  console.log("clicked")
+     // Event listener for file input change
+  document.getElementById('imageInput').addEventListener('change', async function(event) {
+    document.getElementById('result-box').innerHTML = ''
 
-        reizeImage(aspect_ratio)
+    const file =  fetch(document.getElementById('imageInput').value).then((resp) => resp.blob)
+   console.log(file)
+    if (file) {
+      try {
+        for(const image_ratio in IMAGE_ASPECT_RATIOS)
+        {
+          const aspect_ratio = IMAGE_ASPECT_RATIOS[image_ratio]
+          console.log(aspect_ratio)
+       
+        const resizedDataURL = await resizeImage(file, aspect_ratio, aspect_ratio);
+
+        const image_element = document.createElement('img')
+        const image_aspect_ratio = document.createElement('h3')
+        image_aspect_ratio.innerText = image_ratio
+        image_element.src = resizedDataURL;
+        image_element.style.display = 'none';
+        image_element.style.display = 'block';
+        document.getElementById('result-box').append(image_element)
+        document.getElementById('result-box').append(image_aspect_ratio)
+        }
+        
+      } catch (error) {
+        console.error('Error resizing image:', error);
+      }
     }
+  });
+  
 
 }
 
@@ -45,4 +104,6 @@ function start() {
 
 
 
-create_btn.addEventListener('click', start())
+
+
+create_btn.addEventListener('click', start)
