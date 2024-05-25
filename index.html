@@ -1,12 +1,13 @@
 <html>
   <h1>
-    
+    0
   </h1>
   <script>
     let count = 0;
 
     setInterval(()=>{
       count++;
+      document.querySelector('h1').textContent = count;
     },1000)
   </script>
 </html>
